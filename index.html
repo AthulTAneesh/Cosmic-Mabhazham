@@ -11,6 +11,141 @@
     <title>Beyond the Mission</title>
     <link rel="preload" as="image" href="assets/ppt/media/image1.png" />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Archive gallery styles (self-contained so they don't depend on styles.css) -->
+    <style>
+      .archive {
+        position: relative;
+        z-index: 20;
+        background: #030507;
+        color: #e8ecf1;
+        padding: clamp(4rem, 10vw, 9rem) clamp(1rem, 5vw, 4rem);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .archive__intro {
+        max-width: 72rem;
+        margin: 0 auto clamp(2rem, 5vw, 4rem);
+      }
+      .archive__eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        opacity: 0.6;
+        margin: 0 0 1rem;
+      }
+      .archive__title {
+        font-size: clamp(2.2rem, 6vw, 4.5rem);
+        line-height: 1.02;
+        margin: 0 0 1rem;
+        font-weight: 400;
+      }
+      .archive__title em { font-style: italic; opacity: 0.85; }
+      .archive__lede {
+        max-width: 40rem;
+        opacity: 0.75;
+        line-height: 1.6;
+        margin: 0;
+      }
+      .archive__group {
+        max-width: 72rem;
+        margin: 0 auto clamp(3rem, 7vw, 6rem);
+      }
+      .archive__group-head {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .archive__num { font-size: 0.8rem; letter-spacing: 0.2em; opacity: 0.55; }
+      .archive__group-head h3 {
+        margin: 0;
+        font-size: clamp(1.3rem, 3vw, 2rem);
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .archive__sub { margin-left: auto; font-size: 0.8rem; opacity: 0.55; text-align: right; }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: clamp(0.6rem, 1.5vw, 1.1rem);
+      }
+      .gallery__item {
+        grid-column: span 2;
+        margin: 0;
+        position: relative;
+        overflow: hidden;
+        background: #0a0e13;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.3s ease;
+      }
+      .gallery__item.is-in { opacity: 1; transform: none; }
+      .gallery__item:hover { border-color: rgba(255, 255, 255, 0.35); }
+      .gallery__item--wide { grid-column: span 4; }
+      .gallery__item--full { grid-column: 1 / -1; }
+      .gallery__item a { display: block; color: inherit; text-decoration: none; }
+      .gallery__item img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        transition: transform 1.2s ease;
+        background: #0a0e13;
+      }
+      .gallery__item--wide img { aspect-ratio: 16 / 9; }
+      .gallery__item--full img { aspect-ratio: 21 / 6; }
+      .gallery__item:hover img { transform: scale(1.04); }
+      .gallery figcaption {
+        padding: 0.8rem 1rem 1rem;
+        font-size: 0.85rem;
+        line-height: 1.45;
+      }
+      .gallery figcaption strong {
+        display: block;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.2rem;
+      }
+      .gallery figcaption span { display: block; opacity: 0.7; }
+      .gallery figcaption small {
+        display: block;
+        margin-top: 0.45rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.45;
+      }
+      .archive__credit {
+        max-width: 72rem;
+        margin: 0 auto;
+        font-size: 0.75rem;
+        line-height: 1.6;
+        opacity: 0.5;
+      }
+      .archive__credit a { color: inherit; }
+
+      @media (max-width: 800px) {
+        .gallery { grid-template-columns: repeat(2, 1fr); }
+        .gallery__item,
+        .gallery__item--wide { grid-column: span 1; }
+        .gallery__item--full { grid-column: 1 / -1; }
+        .gallery__item--full img { aspect-ratio: 16 / 6; }
+        .archive__sub { display: none; }
+      }
+      @media (max-width: 480px) {
+        .gallery { grid-template-columns: 1fr; }
+        .gallery__item--full { grid-column: auto; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .gallery__item { opacity: 1; transform: none; transition: none; }
+        .gallery__item img { transition: none; }
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -135,6 +270,339 @@
       </section>
     </main>
 
+    <!-- ===== Mission archive: real NASA imagery of Opportunity and Voyager 1 ===== -->
+    <section class="archive" id="archive" aria-labelledby="archive-title">
+      <div class="archive__intro">
+        <p class="archive__eyebrow">The Archive</p>
+        <h2 class="archive__title" id="archive-title">Pictures from <em>beyond the mission</em></h2>
+        <p class="archive__lede">
+          Two spacecraft, two very different journeys. These are some of the images they sent home.
+          Select any picture to open it in NASA’s Photojournal.
+        </p>
+      </div>
+
+      <!-- Opportunity -->
+      <div class="archive__group" id="archive-oppy">
+        <div class="archive__group-head">
+          <span class="archive__num">01</span>
+          <h3>Opportunity</h3>
+          <span class="archive__sub">Meridiani Planum, Mars · 2004–2018</span>
+        </div>
+        <div class="gallery">
+          <figure class="gallery__item gallery__item--wide">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA05755" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA05755.jpg"
+                   alt="Panorama from Opportunity showing Eagle Crater and the plains of Meridiani Planum" />
+              <figcaption>
+                <strong>The “Lion King” panorama</strong>
+                <span>Eagle Crater and the surrounding plains, from Opportunity’s first weeks on Mars.</span>
+                <small>NASA/JPL/Cornell · PIA05755</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA05869" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA05869.jpg"
+                   alt="Layered cliff wall named Burns Cliff inside Endurance Crater" />
+              <figcaption>
+                <strong>“Burns Cliff” beckons</strong>
+                <span>A layered ridge inside Endurance Crater that scientists were eager to study.</span>
+                <small>NASA/JPL/Cornell · PIA05869</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA07110" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA07110.jpg"
+                   alt="Color panorama of Burns Cliff at the base of Endurance Crater's inner wall" />
+              <figcaption>
+                <strong>Burns Cliff, up close</strong>
+                <span>Opportunity drove to the base of the cliff in late 2004 and captured this wide view.</span>
+                <small>NASA/JPL/Cornell · PIA07110</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA03241" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA03241.jpg"
+                   alt="Simulated view of the Opportunity rover inside Endurance Crater" />
+              <figcaption>
+                <strong>Opportunity in Endurance Crater</strong>
+                <span>A synthetic image combining a rover model with a real panoramic mosaic.</span>
+                <small>NASA/JPL-Solar System Visualization Team · PIA03241 · Simulated</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA22074" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA22074.jpg"
+                   alt="View from within Perseverance Valley on Mars with the rover's wheel tracks" />
+              <figcaption>
+                <strong>Inside Perseverance Valley</strong>
+                <span>Wheel tracks mark the rover’s descent into the valley in 2017.</span>
+                <small>NASA/JPL-Caltech/Cornell/ASU · PIA22074</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <!-- New: Opportunity -->
+          <figure class="gallery__item gallery__item--wide">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA09104" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA09104.jpg"
+                   alt="Panorama of Victoria Crater taken by Opportunity from the promontory called Cape Verde" />
+              <figcaption>
+                <strong>Victoria Crater from Cape Verde</strong>
+                <span>The rim of an 800-metre-wide crater, photographed on Opportunity’s 991st sol in November 2006.</span>
+                <small>NASA/JPL-Caltech/Cornell · PIA09104</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA08812" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA08812.jpg"
+                   alt="Orbital view of the Opportunity rover on the rim of Victoria Crater" />
+              <figcaption>
+                <strong>Opportunity, seen from orbit</strong>
+                <span>The rover on the rim of Victoria Crater, imaged by Mars Reconnaissance Orbiter in 2006.</span>
+                <small>NASA/JPL/University of Arizona · PIA08812</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA11048" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA11048.jpg"
+                   alt="Layered cliff face of the Cape Verde promontory inside Victoria Crater" />
+              <figcaption>
+                <strong>The cliffs of Cape Verde</strong>
+                <span>Layers about six metres tall, photographed from inside Victoria Crater in July 2008.</span>
+                <small>NASA/JPL/Cornell · PIA11048</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA16120" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA16120.jpg"
+                   alt="Opportunity's long afternoon shadow stretching across Endeavour Crater" />
+              <figcaption>
+                <strong>A shadow over Endeavour</strong>
+                <span>Opportunity’s own afternoon shadow stretches into Endeavour Crater, August 2012.</span>
+                <small>NASA/JPL-Caltech · PIA16120</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA22222" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA22222.jpg"
+                   alt="Self-portrait of the Opportunity rover at Perseverance Valley on the slopes of Endeavour Crater" />
+              <figcaption>
+                <strong>Self-portrait, Perseverance Valley</strong>
+                <span>Opportunity pictured itself on the slopes of Endeavour Crater, shortly before the 2018 dust storm.</span>
+                <small>NASA/JPL-Caltech · PIA22222</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item gallery__item--full">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA22909" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA22909.jpg"
+                   alt="Opportunity's final 360-degree panorama of Perseverance Valley in approximate true color" />
+              <figcaption>
+                <strong>The Legacy Pan — Opportunity’s last panorama</strong>
+                <span>354 images taken between 13 May and 10 June 2018, just before the dust storm ended contact.</span>
+                <small>NASA/JPL-Caltech/Cornell/ASU · PIA22909 · Approximate true color</small>
+              </figcaption>
+            </a>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Voyager 1 -->
+      <div class="archive__group" id="archive-voyager">
+        <div class="archive__group-head">
+          <span class="archive__num">02</span>
+          <h3>Voyager 1</h3>
+          <span class="archive__sub">Earth · Jupiter · Saturn · 1977–1980</span>
+        </div>
+        <div class="gallery">
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA00013" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA00013.jpg"
+                   alt="Earth and the Moon as crescents in a single frame, photographed by Voyager 1" />
+              <figcaption>
+                <strong>Earth and Moon, together</strong>
+                <span>The first spacecraft image to show both in one frame, 18 September 1977.</span>
+                <small>NASA/JPL · PIA00013</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA00014" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA00014.jpg"
+                   alt="Jupiter's Great Red Spot and surrounding cloud bands photographed by Voyager 1" />
+              <figcaption>
+                <strong>Jupiter’s Great Red Spot</strong>
+                <span>Taken 25 February 1979 from 9.2 million kilometres away.</span>
+                <small>NASA/JPL · PIA00014</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA00144" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA00144.jpg"
+                   alt="Jupiter with its moons Io and Europa, photographed by Voyager 1" />
+              <figcaption>
+                <strong>Jupiter with Io and Europa</strong>
+                <span>Two of the giant planet’s moons, seen in February 1979.</span>
+                <small>NASA/JPL · PIA00144</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA00012" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA00012.jpg"
+                   alt="The four Galilean moons of Jupiter shown at relative scale" />
+              <figcaption>
+                <strong>The four Galilean moons</strong>
+                <span>Io, Europa, Ganymede and Callisto, shown at their correct relative sizes.</span>
+                <small>NASA/JPL · PIA00012</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA02238" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA02238.jpg"
+                   alt="Saturn's moon Titan wrapped in a thick orange haze layer" />
+              <figcaption>
+                <strong>Titan’s thick haze</strong>
+                <span>Saturn’s largest moon, completely wrapped in haze, 12 November 1980.</span>
+                <small>NASA/JPL · PIA02238 · Enhanced</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <!-- New: Voyager 1 -->
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA02287" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA02287.jpg"
+                   alt="Voyager 1 looking straight down through the volcanic plume of Pele on Io" />
+              <figcaption>
+                <strong>Pele’s plume on Io</strong>
+                <span>Looking straight down through the plume of one of Io’s most active volcanoes, 5 March 1979.</span>
+                <small>NASA/JPL · PIA02287</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item gallery__item--wide">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA01969" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA01969.jpg"
+                   alt="Saturn and its rings as a thin crescent, seen by Voyager 1 looking back after its flyby" />
+              <figcaption>
+                <strong>Saturn, looking back</strong>
+                <span>Four days after its closest approach, Voyager 1 turned around and saw Saturn as a crescent — a view never possible from Earth.</span>
+                <small>NASA/JPL · PIA01969</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA00452" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA00452.jpg"
+                   alt="Earth as a tiny point of light, the Pale Blue Dot, photographed by Voyager 1" />
+              <figcaption>
+                <strong>Earth as a Pale Blue Dot</strong>
+                <span>A single pixel of light from the first portrait of the solar system, 14 February 1990.</span>
+                <small>NASA/JPL · PIA00452</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA00021" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA00021.jpg"
+                   alt="Volcanic calderas on Io with a bright blue patch of venting gas" />
+              <figcaption>
+                <strong>A volcanic caldera on Io</strong>
+                <span>Dark-floored calderas linked by red material, with a blue patch of venting gas.</span>
+                <small>NASA/JPL · PIA00021</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA02280" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA02280.jpg"
+                   alt="Io photographed by Voyager 1 at closest approach" />
+              <figcaption>
+                <strong>Io at closest approach</strong>
+                <span>Taken from just 30,800 kilometres away on the morning of 5 March 1979.</span>
+                <small>NASA/JPL · PIA02280</small>
+              </figcaption>
+            </a>
+          </figure>
+
+          <figure class="gallery__item">
+            <a href="https://photojournal.jpl.nasa.gov/catalog/PIA00029" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://photojournal.jpl.nasa.gov/jpeg/PIA00029.jpg"
+                   alt="The first close-up image of Jupiter taken by Voyager 1 in January 1979" />
+              <figcaption>
+                <strong>First close-up of Jupiter</strong>
+                <span>The opening shot of Voyager 1’s three-month investigation, 6 January 1979.</span>
+                <small>NASA/JPL · PIA00029</small>
+              </figcaption>
+            </a>
+          </figure>
+        </div>
+      </div>
+
+      <p class="archive__credit">
+        Images: NASA/JPL-Caltech, with credits shown on each caption. NASA imagery is generally free to use with
+        credit; see the
+        <a href="https://www.jpl.nasa.gov/image-policy" target="_blank" rel="noopener">JPL image policy</a>.
+        Images load directly from NASA’s
+        <a href="https://photojournal.jpl.nasa.gov/" target="_blank" rel="noopener">Photojournal</a>.
+      </p>
+    </section>
+
     <script src="script.js"></script>
+    <script>
+      // Gentle reveal for the archive gallery, and a graceful fallback if an image fails to load.
+      (function () {
+        var items = document.querySelectorAll(".gallery__item");
+        items.forEach(function (item) {
+          var img = item.querySelector("img");
+          if (img) {
+            img.addEventListener("error", function () {
+              item.style.display = "none";
+            });
+          }
+        });
+        if (!("IntersectionObserver" in window)) {
+          items.forEach(function (i) { i.classList.add("is-in"); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-in");
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(function (i) { io.observe(i); });
+      })();
+    </script>
   </body>
 </html>
