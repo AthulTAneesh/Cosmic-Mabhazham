@@ -11,7 +11,7 @@
 }
 
 * { box-sizing: border-box; }
-html { background: var(--ink); scroll-behavior: smooth; }
+html { background: var(--ink); scroll-behavior: smooth;scroll-snap-type: y mandatory; }
 body { margin: 0; min-width: 320px; background: var(--ink); color: var(--white); font-family: Manrope, Arial, sans-serif; }
 button, a { font: inherit; }
 a { color: inherit; }
@@ -77,6 +77,26 @@ h1 em, h2 em { font-style: normal; color: #a9ccef; }
 .mission-data dt, .mission-data dd { margin: 0; font: 500 clamp(.7rem, 1vw, .88rem)/1 "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .mission-data dt { color: #c5b7a9; }
 .mission-data dd { font-size: clamp(1rem, 1.45vw, 1.36rem); color: #fff5ed; }
+.copy--oppy-achievements {
+  top: 275vh;
+  left: 7vw;
+  width: min(34vw, 450px);
+  z-index: 12;
+}
+
+.copy--oppy-achievements h3 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.copy--oppy-achievements ul {
+  padding-left: 1.2rem;
+  line-height: 1.7;
+}
+
+.copy--oppy-achievements li {
+  margin-bottom: 0.8rem;
+}
 .copy--water { top: 402vh; left: clamp(1.15rem, 7vw, 9rem); }
 .copy--water h2 { max-width: 37rem; }
 .copy--long-mission { top: 505vh; right: clamp(1.15rem, 7vw, 10rem); text-align: right; }
@@ -96,6 +116,14 @@ h1 em, h2 em { font-style: normal; color: #a9ccef; }
 blockquote { margin: 0 auto 1rem; max-width: 50rem; font-size: clamp(2.1rem, 5vw, 5.6rem); font-weight: 600; line-height: .98; letter-spacing: -.065em; }
 cite { color: #b8c7d9; font: 500 .68rem/1 "DM Mono", monospace; letter-spacing: .16em; font-style: normal; text-transform: uppercase; }
 .ending__mark { margin-top: 5rem; font: 500 .7rem/1 "DM Mono", monospace; letter-spacing: .22em; }
+.snap-point {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  scroll-snap-align: start;
+  pointer-events: none;
+}
 
 @keyframes pulse { 50% { opacity: .45; box-shadow: 0 0 .9rem .1rem #79b7ff; } }
 @keyframes nudge { 50% { transform: translateX(.65rem); } }
@@ -131,4 +159,101 @@ cite { color: #b8c7d9; font: 500 .68rem/1 "DM Mono", monospace; letter-spacing: 
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+
+/* ===== TEXT FIT & VIEWPORT FIX ===== */
+
+html {
+  scroll-padding-top: 12vh;
+}
+
+.copy {
+  width: min(38rem, calc(100vw - 3rem));
+  max-width: calc(100vw - 3rem);
+}
+
+h1 {
+  font-size: clamp(3rem, min(10vw, 14vh), 8rem);
+  line-height: 0.95;
+}
+
+h2 {
+  font-size: clamp(2.4rem, min(6vw, 9vh), 5.8rem);
+  line-height: 0.98;
+}
+
+/* Reduce oversized chapter headings */
+.copy--oppy-title h2 {
+  font-size: clamp(3.5rem, min(11vw, 13vh), 9rem);
+}
+
+.copy--long-mission h2 {
+  font-size: clamp(3rem, min(7.5vw, 11vh), 7rem);
+}
+
+.copy--storm h2,
+.copy--heliopause h2,
+.copy--pale-blue h2 {
+  font-size: clamp(2.8rem, min(6.5vw, 10vh), 6rem);
+}
+
+.copy--voyager-title h2 {
+  font-size: clamp(3.5rem, min(9vw, 12vh), 8rem);
+}
+
+.lede {
+  font-size: clamp(0.9rem, 1.15vw, 1.1rem);
+  line-height: 1.5;
+}
+
+.mission-data div {
+  padding: 0.6rem 0;
+}
+
+/* Smaller screens */
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 10vh;
+  }
+
+  .copy {
+    width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
+  }
+
+  h2,
+  .copy--question h2,
+  .copy--oppy-title h2,
+  .copy--long-mission h2,
+  .copy--storm h2,
+  .copy--voyager-title h2,
+  .copy--heliopause h2,
+  .copy--pale-blue h2 {
+    font-size: clamp(2.3rem, 9vw, 3.8rem);
+    line-height: 1;
+  }
+
+  .lede {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .mission-data dt,
+  .mission-data dd {
+    font-size: 0.68rem;
+  }
+
+  .copy--long-mission,
+  .copy--pale-blue {
+    text-align: left;
+  }
+
+  .copy--pale-blue .lede {
+    margin-left: 0;
+  }
 }

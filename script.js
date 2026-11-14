@@ -27,7 +27,7 @@
     const mars = pulse(p, .13, .30, .49);
     const surface = pulse(p, .31, .46, .66);
     const storm = pulse(p, .53, .62, .72);
-    const tech = pulse(p, .28, .37, .49);
+    const tech = Math.min( range(p, .25, .10),1 - range(p, .52, .50));
     const voyager = pulse(p, .62, .78, .94);
     const solar = pulse(p, .68, .79, .91);
     const pale = pulse(p, .83, .93, 1.01);
@@ -61,7 +61,9 @@
       const start = Number(copy.dataset.start);
       const end = Number(copy.dataset.end);
       const local = range(p, start, end);
-      const visible = Math.sin(local * Math.PI) > .08;
+      const visible = copy.classList.contains("copy--hero")
+      ? p < 0.12
+      : Math.sin(local * Math.PI) > .08;
       copy.classList.toggle("is-visible", visible);
       if (visible) activeChapter = copy.dataset.chapter;
     });
