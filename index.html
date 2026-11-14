@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030507" />
+    <meta
+      name="description"
+      content="Beyond the Mission — a scroll-driven space story about Opportunity and Voyager 1."
+    />
+    <title>Beyond the Mission</title>
+    <link rel="preload" as="image" href="assets/ppt/media/image1.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <noscript>
+      <p class="noscript">This story uses JavaScript to respond to your scroll position.</p>
+    </noscript>
+
+    <div class="loading" id="loading" aria-live="polite">
+      <span class="loading__star"></span>
+      <span>Loading the mission</span>
+    </div>
+
+    <main id="story" aria-label="Beyond the Mission interactive story">
+      <div class="stage" aria-hidden="true">
+        <div class="space">
+          <div class="stars"></div>
+          <div class="stars stars--near"></div>
+          <div class="vignette"></div>
+        </div>
+
+        <div class="atmosphere atmosphere--blue"></div>
+        <div class="atmosphere atmosphere--rust"></div>
+        <div class="dust"></div>
+
+        <img class="earth earth--hero" src="assets/ppt/media/image13.png" alt="" />
+        <img class="mars" src="assets/ppt/media/image2.png" alt="" />
+        <div class="mars-surface"></div>
+
+        <div class="technical-frame">
+          <img src="assets/ppt/media/image14.jpeg" alt="" />
+        </div>
+
+        <img class="voyager" src="assets/ppt/media/image12.png" alt="" />
+        <img class="solar-system" src="assets/ppt/media/image19.png" alt="" />
+        <img class="pale-dot" src="assets/ppt/media/image18.jpeg" alt="" />
+        <img class="earth earth--return" src="assets/ppt/media/image13.png" alt="" />
+
+        <div class="scanline"></div>
+      </div>
+
+      <header class="hud">
+        <a class="brand" href="#top" aria-label="Return to the start">BEYOND<br />THE MISSION</a>
+        <div class="hud__right">
+          <span class="chapter" id="chapter-label">Prologue</span>
+          <span class="progress" aria-hidden="true"><i id="progress-bar"></i></span>
+          <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false">
+            Enable motion
+          </button>
+        </div>
+      </header>
+
+      <div class="scroll-cue" id="scroll-cue" aria-hidden="true">
+        <span>SCROLL TO BEGIN</span><i></i>
+      </div>
+
+      <section class="scroll-track" id="top">
+        <article class="copy copy--hero" data-start="0" data-end="0.12" data-chapter="Prologue">
+          <p class="eyebrow">A COSMICMAMBAZHAM STORY</p>
+          <h1>Beyond<br /><em>the Mission</em></h1>
+          <p class="lede">Some machines were built to visit another world. A few kept going long after their first assignment ended.</p>
+        </article>
+
+        <article class="copy copy--question" data-start="0.075" data-end="0.21" data-chapter="The Question">
+          <p class="eyebrow">SINCE THE 1960s</p>
+          <h2>What happens when a machine outlives the mission it was assigned?</h2>
+        </article>
+
+        <article class="copy copy--oppy-title" data-start="0.17" data-end="0.31" data-chapter="01 / Opportunity">
+          <p class="eyebrow">01</p>
+          <h2>OPPY</h2>
+          <p class="lede">Opportunity was designed to study the geology of Mars and look for signs of ancient water.</p>
+        </article>
+
+        <article class="copy copy--oppy-data" data-start="0.27" data-end="0.40" data-chapter="01 / Opportunity">
+          <p class="eyebrow">MISSION PROFILE</p>
+          <dl class="mission-data">
+            <div><dt>Launched</dt><dd>07.07.2003</dd></div>
+            <div><dt>Planned life</dt><dd>90 sols</dd></div>
+            <div><dt>Actual life</dt><dd>5,111 sols</dd></div>
+          </dl>
+        </article>
+
+        <article class="copy copy--water" data-start="0.35" data-end="0.49" data-chapter="01 / Opportunity">
+          <p class="eyebrow">WHAT OPPY FOUND</p>
+          <h2>Evidence of a Mars that once held water.</h2>
+          <p class="lede">Rocks, soil and craters carried clues to environments that were once wet.</p>
+        </article>
+
+        <article class="copy copy--long-mission" data-start="0.46" data-end="0.60" data-chapter="The Long Mission">
+          <p class="eyebrow">A JOURNEY THAT EXCEEDED EXPECTATIONS</p>
+          <h2><span>90</span> days<br />became <span>15</span> years.</h2>
+        </article>
+
+        <article class="copy copy--storm" data-start="0.56" data-end="0.68" data-chapter="When the Sun Went Silent">
+          <p class="eyebrow">JUNE 2018</p>
+          <h2>When the Sun went silent.</h2>
+          <p class="lede">A planet-wide dust storm blocked Opportunity’s solar panels. NASA declared the mission complete on 13 February 2019.</p>
+        </article>
+
+        <article class="copy copy--voyager-title" data-start="0.66" data-end="0.79" data-chapter="02 / Voyager 1">
+          <p class="eyebrow">02</p>
+          <h2>VOYAGER<br /><em>ONE</em></h2>
+          <p class="lede">Launched in 1977 to explore the outer planets and their moons, atmospheres and magnetic fields.</p>
+        </article>
+
+        <article class="copy copy--heliopause" data-start="0.75" data-end="0.87" data-chapter="Interstellar Space">
+          <p class="eyebrow">2012 / 35 YEARS AFTER LAUNCH</p>
+          <h2>The first human-made object to cross into interstellar space.</h2>
+        </article>
+
+        <article class="copy copy--pale-blue" data-start="0.84" data-end="0.96" data-chapter="The Pale Blue Dot">
+          <p class="eyebrow">14 FEBRUARY 1990</p>
+          <h2>A planet, six billion kilometres away.</h2>
+          <p class="lede">Voyager looked back and photographed Earth as a tiny speck of light.</p>
+        </article>
+
+        <article class="copy copy--ending" data-start="0.945" data-end="1.05" data-chapter="Beyond the Mission">
+          <p class="eyebrow">A FINAL TRANSMISSION</p>
+          <blockquote>“Look again at that dot. That’s here. That’s home. That’s us.”</blockquote>
+          <cite>— Carl Sagan</cite>
+          <p class="ending__mark">BEYOND THE MISSION</p>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
