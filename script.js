@@ -26,12 +26,12 @@
 
     const mars = pulse(p, .13, .30, .49);
     const surface = pulse(p, .31, .46, .66);
-    const storm = pulse(p, .53, .62, .72);
-    const tech = pulse(p, .28, .37, .49);
+    const tech = pulse(p, .25, .31, .37);
+    const achieve = pulse(p, .36, .42, .48);
     const voyager = pulse(p, .62, .78, .94);
     const solar = pulse(p, .68, .79, .91);
     const pale = pulse(p, .83, .93, 1.01);
-
+    const storm = 0;
     set("--mars-opacity", mars.toFixed(3));
     set("--mars-scale", map(p, .13, .47, .14, 1.24).toFixed(3));
     set("--mars-x", `${map(p, .13, .47, 44, -28).toFixed(2)}vw`);
@@ -41,7 +41,9 @@
     set("--surface-scale", map(p, .31, .66, 1.42, 1.03).toFixed(3));
     set("--surface-y", `${map(p, .31, .66, 27, 0).toFixed(2)}%`);
     set("--tech-opacity", tech.toFixed(3));
-    set("--tech-y", `${map(p, .28, .49, 22, 0).toFixed(2)}%`);
+    set("--tech-y", `${map(p, .25, .30, 22, 0).toFixed(2)}%`);
+    set("--ach-opacity", achieve.toFixed(3));
+    set("--ach-y", `${map(p, .36, .41, 22, 0).toFixed(2)}%`);
     set("--dust-opacity", storm.toFixed(3));
     set("--dust-x", `${map(p, .53, .72, 45, -16).toFixed(2)}%`);
     set("--voyager-opacity", voyager.toFixed(3));
@@ -61,13 +63,24 @@
       const start = Number(copy.dataset.start);
       const end = Number(copy.dataset.end);
       const local = range(p, start, end);
-      const visible = Math.sin(local * Math.PI) > .08;
+      const visible = copy.classList.contains("copy--hero")
+      ? p < 0.12
+      : Math.sin(local * Math.PI) > .08;
       copy.classList.toggle("is-visible", visible);
       if (visible) activeChapter = copy.dataset.chapter;
     });
     chapter.textContent = activeChapter;
     scrollCue.classList.toggle("is-hidden", p > .015);
   }
+
+  // If an image's extension differs (e.g. image11.jpeg vs .png), try the alternatives.
+  document.querySelectorAll("img[data-fallbacks]").forEach((img) => {
+    const alternatives = img.dataset.fallbacks.split(",");
+    img.addEventListener("error", () => {
+      const next = alternatives.shift();
+      if (next) img.src = img.src.replace(/\.[a-z]+$/i, `.${next}`);
+    });
+  });
 
   let ticking = false;
   window.addEventListener("scroll", () => {
