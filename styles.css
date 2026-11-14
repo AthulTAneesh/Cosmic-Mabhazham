@@ -39,6 +39,8 @@ a { color: inherit; }
 .technical-frame { position: absolute; z-index: 9; width: min(37vw, 510px); right: 7vw; bottom: 7vh; opacity: var(--tech-opacity, 0); transform: translateY(var(--tech-y, 20%)) rotate(1deg); border: 1px solid rgba(243, 242, 237, .34); box-shadow: 0 1rem 3rem rgba(0,0,0,.42); overflow: hidden; }
 .technical-frame::after { content: "OPPORTUNITY / INSTRUMENT MAP"; position: absolute; right: .65rem; bottom: .55rem; color: #fff; font: 500 .49rem/1 "DM Mono", monospace; letter-spacing: .12em; text-shadow: 0 1px 3px #000; }
 .technical-frame img { width: 100%; display: block; filter: saturate(.75) contrast(1.05); }
+.technical-frame--achievements { opacity: var(--ach-opacity, 0); transform: translateY(var(--ach-y, 20%)) rotate(-1deg); }
+.technical-frame--achievements::after { content: "OPPORTUNITY / ON MARS"; }
 .voyager { position: absolute; z-index: 11; width: min(46vw, 680px); left: -20vw; top: 30vh; opacity: var(--voyager-opacity, 0); transform: translate(var(--voyager-x, 0), var(--voyager-y, 0)) rotate(-9deg) scale(var(--voyager-scale, .6)); filter: drop-shadow(0 1rem 1.4rem rgba(0, 0, 0, .7)); will-change: transform, opacity; }
 .solar-system { position: absolute; z-index: 5; width: min(84vw, 1400px); left: 8vw; top: 19vh; opacity: var(--solar-opacity, 0); transform: translateX(var(--solar-x, 8vw)) scale(var(--solar-scale, 1.08)); mix-blend-mode: screen; }
 .pale-dot { position: absolute; z-index: 12; height: 100vh; width: 100vw; max-width: none; object-fit: cover; opacity: var(--dot-opacity, 0); transform: scale(var(--dot-scale, 2.5)); filter: brightness(.75) contrast(1.35); }
@@ -78,10 +80,22 @@ h1 em, h2 em { font-style: normal; color: #a9ccef; }
 .mission-data dt { color: #c5b7a9; }
 .mission-data dd { font-size: clamp(1rem, 1.45vw, 1.36rem); color: #fff5ed; }
 .copy--oppy-achievements {
-  top: 275vh;
-  left: 7vw;
-  width: min(34vw, 450px);
-  z-index: 12;
+  top: 400vh;
+  left: clamp(1.15rem, 7vw, 9rem);
+  width: min(34rem, 46vw);
+}
+
+.copy--oppy-achievements h2 {
+  font-size: clamp(2.2rem, min(4.6vw, 8vh), 4.6rem);
+}
+
+.achievement-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #d7dce0;
+  font-size: clamp(.9rem, 1.15vw, 1.1rem);
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .copy--oppy-achievements h3 {
@@ -97,7 +111,7 @@ h1 em, h2 em { font-style: normal; color: #a9ccef; }
 .copy--oppy-achievements li {
   margin-bottom: 0.8rem;
 }
-.copy--water { top: 402vh; left: clamp(1.15rem, 7vw, 9rem); }
+.copy--water { top: 450vh; left: clamp(1.15rem, 7vw, 9rem); }
 .copy--water h2 { max-width: 37rem; }
 .copy--long-mission { top: 505vh; right: clamp(1.15rem, 7vw, 10rem); text-align: right; }
 .copy--long-mission h2 { font-size: clamp(3.3rem, 8.2vw, 8.8rem); }
@@ -147,7 +161,9 @@ cite { color: #b8c7d9; font: 500 .68rem/1 "DM Mono", monospace; letter-spacing: 
   .copy--question { top: 123vh; }
   .copy--oppy-title { top: 220vh; }
   .copy--oppy-data { top: 322vh; }
-  .copy--water { top: 406vh; }
+  .copy--water { top: 452vh; }
+  .copy--oppy-achievements { top: 402vh; width: calc(100vw - 2rem); left: 1rem; }
+  .technical-frame--achievements { width: 58vw; right: 5vw; bottom: 7vh; }
   .copy--long-mission { top: 510vh; }
   .copy--storm { top: 608vh; }
   .copy--voyager-title { top: 711vh; }
